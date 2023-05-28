@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1066715523402",
+    "firebase_url": "https://noel-aa7f5-default-rtdb.firebaseio.com",
+    "project_id": "noel-aa7f5",
+    "storage_bucket": "noel-aa7f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066715523402:android:e479ae64564e1ab08ff9b3",
+        "android_client_info": {
+          "package_name": "com.example.health_worker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066715523402-rc2uq5oif3a8nvul0sju0cslqip8ir8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOGpcE1N075iXKhwxMHdEC-KmExGYgc8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066715523402-rc2uq5oif3a8nvul0sju0cslqip8ir8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066715523402:android:bf932c0a2d4b53a18ff9b3",
+        "android_client_info": {
+          "package_name": "com.example.sch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066715523402-rc2uq5oif3a8nvul0sju0cslqip8ir8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOGpcE1N075iXKhwxMHdEC-KmExGYgc8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066715523402-rc2uq5oif3a8nvul0sju0cslqip8ir8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
