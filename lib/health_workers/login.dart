@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 
 import 'signup.dart';
+import 'bottomnav.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
@@ -89,7 +90,12 @@ class _LogInState extends State<LogIn> {
                   ),
                   const SizedBox( height: 60,),
                   InkWell(
-                  onTap: (){},
+                  onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BottomNav()),
+                  );
+                },
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
