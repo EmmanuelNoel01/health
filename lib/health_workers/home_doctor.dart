@@ -45,7 +45,7 @@ class _HomeDocState extends State<HomeDoc> {
               right: 0,
               child: const Center(
                 child: Text(
-                  'Welcome !!!!!',
+                  'Welcome, Noel',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
