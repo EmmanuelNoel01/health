@@ -15,26 +15,63 @@ class _PrescriptionState extends State<Prescription> {
   final _prescriptionController = TextEditingController();
   final _daysController = TextEditingController();
   final _diseaseController = TextEditingController();
+  final _monthController = TextEditingController();
+  final _divisionController = TextEditingController();
 
   Future<void> submitForm() async {
     if (_formKey.currentState!.validate()) {
-      final url = 'http://localhost:3000/api/patients';
-      final response = await http.post(
-        Uri.parse(url),
-        body: {
-          'name': _nameController.text,
-          'drug': _drugController.text,
-          'prescription': _prescriptionController.text,
-          'days': _daysController.text,
-          'disease': _diseaseController.text,
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Confirm Submission'),
+            content: Text('Name: ${_nameController.text}\n'
+                'Drug: ${_drugController.text}\n'
+                'Prescription: ${_prescriptionController.text}\n'
+                'Number of Days: ${_daysController.text}\n'
+                'Disease: ${_diseaseController.text}\n'
+                'Month: ${_monthController.text}\n'
+                'Division: ${_divisionController.text}'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _submitFormData();
+                },
+                child: const Text('OK'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancel'),
+              ),
+            ],
+          );
         },
       );
+    }
+  }
 
-      if (response.statusCode == 200) {
-        print('Form submitted successfully');
-      } else {
-        print('Error submitting form');
-      }
+  Future<void> _submitFormData() async {
+    final url = 'http://192.168.30.34/apis/insert_record.php';
+    final response = await http.post(
+      Uri.parse(url),
+      body: {
+        'name': _nameController.text,
+        'drug': _drugController.text,
+        'prescription': _prescriptionController.text,
+        'days': _daysController.text,
+        'disease': _diseaseController.text,
+        'month': _monthController.text,
+        'division': _divisionController.text,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print('Form submitted successfully');
+    } else {
+      print('Error submitting form');
     }
   }
 
@@ -45,6 +82,8 @@ class _PrescriptionState extends State<Prescription> {
     _prescriptionController.dispose();
     _daysController.dispose();
     _diseaseController.dispose();
+    _monthController.dispose();
+    _divisionController.dispose();
     super.dispose();
   }
 
@@ -54,7 +93,7 @@ class _PrescriptionState extends State<Prescription> {
       appBar: AppBar(
         leading: IconButton(
           color: Colors.black,
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -69,12 +108,12 @@ class _PrescriptionState extends State<Prescription> {
                 children: [
                   Container(
                     color: Colors.green,
-                    height: MediaQuery.of(context).size.height / 4,
+                    height: MediaQuery.of(context).size.height / 8,
                     width: double.infinity,
                   ),
                 ],
               ),
-              SizedBox(height: 50.0),
+              const SizedBox(height: 50.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Form(
@@ -85,7 +124,7 @@ class _PrescriptionState extends State<Prescription> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text(
+                            child: const Text(
                               'Name:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -99,12 +138,6 @@ class _PrescriptionState extends State<Prescription> {
                             decoration: const InputDecoration(
                               hintText: 'Enter name',
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter a name.';
-                              }
-                              return null;
-                            },
                           ),
                         ],
                       ),
@@ -113,7 +146,7 @@ class _PrescriptionState extends State<Prescription> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text(
+                            child: const Text(
                               'Drug:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -127,12 +160,6 @@ class _PrescriptionState extends State<Prescription> {
                             decoration: const InputDecoration(
                               hintText: 'Enter drug',
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter a drug.';
-                              }
-                              return null;
-                            },
                           ),
                         ],
                       ),
@@ -141,7 +168,7 @@ class _PrescriptionState extends State<Prescription> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text(
+                            child: const Text(
                               'Prescription:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -155,12 +182,6 @@ class _PrescriptionState extends State<Prescription> {
                             decoration: const InputDecoration(
                               hintText: 'Enter prescription',
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter a prescription.';
-                              }
-                              return null;
-                            },
                           ),
                         ],
                       ),
@@ -169,7 +190,7 @@ class _PrescriptionState extends State<Prescription> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text(
+                            child: const Text(
                               'Number of days:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -183,12 +204,6 @@ class _PrescriptionState extends State<Prescription> {
                             decoration: const InputDecoration(
                               hintText: 'Enter Number of days for prescription',
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter days.';
-                              }
-                              return null;
-                            },
                           ),
                         ],
                       ),
@@ -197,7 +212,7 @@ class _PrescriptionState extends State<Prescription> {
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Text(
+                            child: const Text(
                               'Disease:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -211,12 +226,50 @@ class _PrescriptionState extends State<Prescription> {
                             decoration: const InputDecoration(
                               hintText: 'Enter the disease being treated',
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter the disease.';
-                              }
-                              return null;
-                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16.0),
+                      Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: const Text(
+                              'Month Tested:',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _monthController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter Month Tested',
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16.0),
+                      Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: const Text(
+                              'Division:',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _divisionController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter Division For Tested Person',
+                            ),
                           ),
                         ],
                       ),

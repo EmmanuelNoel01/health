@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'Prescription.dart';
 import 'explorer/fl_bar_chart_screen.dart';
-import 'report.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeDoc extends StatefulWidget {
   @override
@@ -12,6 +12,14 @@ class HomeDoc extends StatefulWidget {
 }
 
 class _HomeDocState extends State<HomeDoc> {
+  final Uri _url = Uri.parse('http://192.168.56.1/apis/reports.php');
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +38,6 @@ class _HomeDocState extends State<HomeDoc> {
               child: Container(
                 width: 100,
                 height: 250,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/welcome.PNG'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
               ),
             ),
             Positioned(
@@ -45,7 +46,7 @@ class _HomeDocState extends State<HomeDoc> {
               right: 0,
               child: const Center(
                 child: Text(
-                  'Welcome, Noel',
+                  'Welcome',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
@@ -108,10 +109,7 @@ class _HomeDocState extends State<HomeDoc> {
               SizedBox(width: 16.0),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Search()),
-                  );
+                  _launchUrl();
                 },
                 child: Container(
                   width: 150,
@@ -206,6 +204,7 @@ class _HomeDocState extends State<HomeDoc> {
             ],
           ),
         ),
-      ]),);
+      ]),
+    );
   }
 }
