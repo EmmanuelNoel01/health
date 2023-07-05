@@ -1,10 +1,10 @@
-// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-
+import 'health_workers/login.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -34,11 +34,16 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: TextStyle(color: Colors.red),
               ),
               onTap: () {
-                // Implement log out functionality
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LogIn()),
+                  (route) => false,
+                );
               },
             ),
           ],
         ),
-      ),);
+      ),
+    );
   }
 }
